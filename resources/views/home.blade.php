@@ -13,23 +13,27 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h4>User list</h4>
+                    <h4>Employee list</h4>
 
-                    <table class="table">
+                    <table class="table yajra-datatable">
                         <thead>
                             <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Phone</th>
                             </tr>
                         </thead>
                         
                         <tbody>
-                            @foreach($usersData as $user)
+                            @foreach($employeeData as $employee)
                                 <tr>
-                                    <th scope="row">{{$user->id}}</th>
-                                    <td>{{$user->name}}</td>
-                                    <td>{{$user->email}}</td>
+                                    <th scope="row">{{$employee->id}}</th>
+                                    <td>{{$employee->name}}</td>
+                                    <td>{{$employee->email}}</td>
+                                    <td>{{$employee->role}}</td>
+                                    <td>{{$employee->phone}}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -39,4 +43,15 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+
+<script type="text/javascript">
+    $(document).ready(function(){    
+        var table = $('.yajra-datatable').DataTable();
+    });
+</script>
+@endpush
 @endsection
+
+

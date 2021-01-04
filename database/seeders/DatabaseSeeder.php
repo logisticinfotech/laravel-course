@@ -12,7 +12,16 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        // \App\Models\User::factory(10)->create();
+    {       
+        for ($i=0; $i < 10 ; $i++) { 
+            # code...
+            \App\Models\Employee::create([
+                'name' => $i.'_employee',
+                'email' => 'employee'.$i.'@gmail.com',
+                'role' => $i.'_role',
+                'phone' => '9876543210',
+                'dob' => '2021-01-04'
+            ]);
+        }
     }
 }
