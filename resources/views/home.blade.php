@@ -12,31 +12,24 @@
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
-                    @endif
-                    <h4>Employee list</h4>
+                    @endif   
+                    <div class="row mb-5">
+                        <h4 class="col-md-9">Employee list</h4>
+                        <a href="{{route('employee.create')}}" class="btn btn-success">Create </a>
+                    </div>
 
                     <table class="table yajra-datatable">
                         <thead>
                             <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Phone</th>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Dob</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        
-                        <tbody>
-                            @foreach($employeeData as $employee)
-                                <tr>
-                                    <th scope="row">{{$employee->id}}</th>
-                                    <td>{{$employee->name}}</td>
-                                    <td>{{$employee->email}}</td>
-                                    <td>{{$employee->role}}</td>
-                                    <td>{{$employee->phone}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -48,7 +41,25 @@
 
 <script type="text/javascript">
     $(document).ready(function(){    
-        var table = $('.yajra-datatable').DataTable();
+        var table = $('.yajra-datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('employees-list') }}",
+            columns: [
+                {data: 'id', name: 'id'},
+                {data: 'name', name: 'name'},
+                {data: 'email', name: 'email'},
+                {data: 'role', name: 'role'},
+                {data: 'phone', name: 'phone'},
+                {data: 'dob', name: 'dob'},
+                {
+                    data: 'action', 
+                    name: 'action', 
+                    orderable: true, 
+                    searchable: true
+                },
+            ]
+        });
     });
 </script>
 @endpush
